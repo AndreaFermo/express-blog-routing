@@ -68,7 +68,15 @@ function downloadImage(req, res) {
         return;
     }
 
+
     const imagePath = path.resolve(__dirname, '..', 'public', 'imgs', 'posts', post.image);
+
+    fs.access(imagePath, fs.constants.F_OK, (err) => {
+        if (err) {
+            res.status(404).send('Immagine non trovata');
+            return;
+        }
+    })
 
     res.download(imagePath);
 
