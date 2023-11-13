@@ -10,14 +10,10 @@ function index(req, res) {
             const postsMapped = posts.map((post) => {
                 return {
                     ...post,
-                    image_url: `http://localhost:3002/imgs/posts/${post.image}`,
-                    image_download_url: `http://localhost:3002/posts/${post.slug}/download`
-
-
-
+                    image_url: `http://${req.headers.host}/imgs/posts/${post.image}`,
+                    image_download_url: `http://${req.headers.host}/posts/${post.slug}/download`
                 }
             });
-            console.log(postsMapped)
             const html = ["<h1>Lista dei Post</h1>"];
 
             html.push("<ul>");
