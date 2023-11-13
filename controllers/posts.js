@@ -2,6 +2,7 @@ const posts = require("../db/db.js");
 const path = require("path");
 const fs = require("fs");
 
+
 function index(req, res) {
     res.format({
         html: () => {
@@ -35,6 +36,10 @@ function show(req, res) {
                 res.status(404).send(`Post ${postSlug} non trovato`);
                 return;
             }
+            console.log(req.params.filePath)
+
+            post.image_url = `http://localhost:3002/imgs/posts/${post.image}`;
+
 
             res.json(post);
         },
@@ -88,5 +93,6 @@ module.exports = {
     index,
     show,
     create,
-    downloadImage
+    downloadImage,
+
 }
