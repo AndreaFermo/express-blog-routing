@@ -19,7 +19,7 @@ function index(req, res) {
             html.push("<ul>");
 
             for (const post of postsMapped) {
-                html.push(`<li>${post.title} <a href="${post.image_url}">Vedi Immagine</a> <a href="${post.image_download_url}">Scarica</a></li>`)
+                html.push(`<li>${post.title} <a href="${post.image_url}">Vedi Immagine</a> <a href="${post.image_download_url}">Scarica</a> <a href="http://${req.headers.host}/posts/${post.slug}">Mostra</a></li>`)
             }
 
             html.push("</ul>");
