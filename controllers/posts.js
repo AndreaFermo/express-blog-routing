@@ -6,12 +6,24 @@ const fs = require("fs");
 function index(req, res) {
     res.format({
         html: () => {
+
+            const postsMapped = posts.map((post) => {
+                return {
+                    ...post,
+                    image_url: `http://localhost:3002/imgs/posts/${post.image}`,
+                    image_download_url: `http://localhost:3002/posts/${post.slug}/download`
+
+
+
+                }
+            });
+            console.log(postsMapped)
             const html = ["<h1>Lista dei Post</h1>"];
 
             html.push("<ul>");
 
-            for (const post of posts) {
-                html.push(`<li>${post.title}</li>`)
+            for (const post of postsMapped) {
+                html.push(`<li>${post.title} <a href="${post.image_url}">Vedi Immagine</a> <a href="${post.image_download_url}">Scarica</a></li>`)
             }
 
             html.push("</ul>");
@@ -39,6 +51,7 @@ function show(req, res) {
             console.log(req.params.filePath)
 
             post.image_url = `http://localhost:3002/imgs/posts/${post.image}`;
+            post.image_download_url = `http://localhost:3002/posts/${post.slug}/download`;
 
 
             res.json(post);
